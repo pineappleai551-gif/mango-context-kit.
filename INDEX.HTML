@@ -1,0 +1,300 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10110f">
+  <meta name="description" content="Mango Context Kit helps you organize project context and carry it between AI assistants.">
+  <title>Mango Context Kit</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Mango Context Kit home">
+        <span class="brand-mark">🥭</span>
+        <span class="brand-name">mango<span>kit</span></span>
+      </a>
+
+      <button class="button button-primary new-project-button" id="newProjectBtn">
+        <span aria-hidden="true">＋</span> New project
+      </button>
+
+      <p class="sidebar-label">YOUR WORKSPACE</p>
+      <nav id="projectList" class="project-list" aria-label="Your projects">
+        <!-- Projects will appear here -->
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="local-status">
+          <span class="status-dot"></span>
+          <div>
+            <strong>Local workspace</strong>
+            <span>Saved in this browser</span>
+          </div>
+        </div>
+        <p class="sidebar-footnote">Your context. Your control.</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="breadcrumb">
+          <span>Workspace</span>
+          <span class="breadcrumb-divider">/</span>
+          <strong id="breadcrumbProject">New project</strong>
+        </div>
+
+        <div class="tone-control">
+          <label for="toneSelect">Handoff tone</label>
+          <select id="toneSelect" name="toneSelect">
+            <option value="genz">Gen Z · Casual</option>
+            <option value="millennial" selected>Millennial · Professional</option>
+          </select>
+        </div>
+
+        <span class="version-label">BETA · V1.0</span>
+      </header>
+
+      <section class="welcome-section">
+        <div class="eyebrow">
+          <span class="eyebrow-line"></span>
+          YOUR PROJECT, WITHOUT THE CONTEXT LOSS
+        </div>
+        <h1>Pick up where<br>you <span class="accent-text">left off.</span></h1>
+        <p class="welcome-copy">
+          Keep your project knowledge organized. Create a handoff brief
+          and take it to any AI assistant, whenever you need to.
+        </p>
+      </section>
+
+      <section class="project-section" aria-labelledby="projectHeading">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">PROJECT WORKSPACE</p>
+            <h2 id="projectHeading">Let's get the context down.</h2>
+          </div>
+          <span class="autosave-label">
+            <span class="status-dot"></span> Auto-save
+          </span>
+        </div>
+
+        <form id="projectForm">
+          <div class="field-card project-name-card">
+            <label for="projectName">Project name</label>
+            <input
+              id="projectName"
+              name="projectName"
+              type="text"
+              maxlength="100"
+              placeholder="e.g. Launch my online store"
+              autocomplete="off"
+            >
+          </div>
+
+          <div class="fields-grid">
+            <div class="field-card">
+              <div class="field-heading">
+                <label for="projectGoal">01 — The goal</label>
+                <span>WHY</span>
+              </div>
+              <textarea
+                id="projectGoal"
+                name="projectGoal"
+                rows="3"
+                maxlength="5000"
+                placeholder="What are you trying to achieve?"
+              ></textarea>
+              <p class="field-hint">What does success look like?</p>
+            </div>
+
+            <div class="field-card">
+              <div class="field-heading">
+                <label for="projectContext">02 — Background & context</label>
+                <span>WHAT</span>
+              </div>
+              <textarea
+                id="projectContext"
+                name="projectContext"
+                rows="3"
+                maxlength="10000"
+                placeholder="Explain the project, relevant details, and current situation..."
+              ></textarea>
+              <p class="field-hint">Give the next assistant the big picture.</p>
+            </div>
+
+            <div class="field-card">
+              <div class="field-heading">
+                <label for="projectDecisions">03 — Decisions made</label>
+                <span>LOCKED IN</span>
+              </div>
+              <textarea
+                id="projectDecisions"
+                name="projectDecisions"
+                rows="3"
+                maxlength="5000"
+                placeholder="What have you decided already? What should not be changed?"
+              ></textarea>
+              <p class="field-hint">Keep important choices consistent.</p>
+            </div>
+
+            <div class="field-card">
+              <div class="field-heading">
+                <label for="projectConstraints">04 — Constraints</label>
+                <span>LIMITS</span>
+              </div>
+              <textarea
+                id="projectConstraints"
+                name="projectConstraints"
+                rows="3"
+                maxlength="5000"
+                placeholder="Budget, tools, deadlines, technical limits..."
+              ></textarea>
+              <p class="field-hint">What must the assistant work around?</p>
+            </div>
+
+            <div class="field-card">
+              <div class="field-heading">
+                <label for="projectCompleted">05 — Work completed</label>
+                <span>PROGRESS</span>
+              </div>
+              <textarea
+                id="projectCompleted"
+                name="projectCompleted"
+                rows="3"
+                maxlength="7000"
+                placeholder="What have you built, tried, or finished so far?"
+              ></textarea>
+              <p class="field-hint">Capture progress so you don't repeat work.</p>
+            </div>
+
+            <div class="field-card">
+              <div class="field-heading">
+                <label for="projectQuestions">06 — Open questions</label>
+                <span>UNRESOLVED</span>
+              </div>
+              <textarea
+                id="projectQuestions"
+                name="projectQuestions"
+                rows="3"
+                maxlength="5000"
+                placeholder="What's unclear? What still needs a decision?"
+              ></textarea>
+              <p class="field-hint">Keep unfinished thinking visible.</p>
+            </div>
+          </div>
+
+          <div class="field-card next-steps-card">
+            <div class="field-heading">
+              <label for="projectNextSteps">07 — Next steps</label>
+              <span>WHAT'S NEXT</span>
+            </div>
+            <textarea
+              id="projectNextSteps"
+              name="projectNextSteps"
+              rows="4"
+              maxlength="7000"
+              placeholder="What should happen next? Be specific about the immediate next action."
+            ></textarea>
+            <p class="field-hint">Tell the next assistant exactly where to continue.</p>
+          </div>
+        </form>
+
+        <section class="handoff-panel" aria-labelledby="handoffHeading">
+          <div class="handoff-copy">
+            <div class="handoff-icon" aria-hidden="true">↗</div>
+            <div>
+              <p class="section-kicker">READY FOR A FRESH START?</p>
+              <h2 id="handoffHeading">Build your handoff brief.</h2>
+              <p>Turn your notes into a portable project summary for your next AI conversation.</p>
+            </div>
+          </div>
+
+          <button class="button button-primary generate-button" id="generateBtn" type="button">
+            Generate handoff <span aria-hidden="true">→</span>
+          </button>
+        </section>
+        
+        <!-- Mango loading animation -->
+        <section
+          id="generationLoader"
+          class="mango-loader"
+          role="status"
+          aria-live="polite"
+          aria-label="Preparing your project handoff"
+          hidden
+        >
+          <div class="mango-loader-logo" aria-hidden="true">🥭</div>
+          <h3>Getting your context ready...</h3>
+          <p>Gathering your notes and organizing the next steps.</p>
+          <div class="mango-loader-dots" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </section>
+
+        <section class="output-section" id="outputSection" hidden aria-labelledby="outputHeading">
+          <div class="output-heading">
+            <div>
+              <p class="section-kicker">YOUR PORTABLE CONTEXT</p>
+              <h2 id="outputHeading">Your handoff brief</h2>
+            </div>
+            <span class="output-badge">MARKDOWN READY</span>
+          </div>
+
+          <p class="output-description">
+            Review your brief, then copy it into your next AI conversation or save it as a file.
+          </p>
+
+          <label class="sr-only" for="handoffOutput">Generated handoff brief</label>
+          <textarea
+            id="handoffOutput"
+            class="handoff-output"
+            rows="18"
+            spellcheck="false"
+            readonly
+          ></textarea>
+
+          <div class="output-actions">
+            <button class="button button-primary" id="copyBtn" type="button">
+              <span aria-hidden="true">▢</span> Copy brief
+            </button>
+            <button class="button button-secondary" id="downloadBtn" type="button">
+              ↓ Export .md
+            </button>
+          </div>
+        </section>
+
+        <p class="privacy-note">
+          <span aria-hidden="true">◈</span>
+          <strong>Built for your control.</strong>
+          Your projects are stored in this browser, not sent to an AI service.
+          Export important work as a backup. Avoid saving passwords, API keys, or sensitive information here.
+        </p>
+
+        <footer class="app-footer">
+          <span>🥭 Made with purpose by Mango Ships.</span>
+          <span>Small tools. Useful things.</span>
+        </footer>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <dialog id="deleteDialog" class="confirm-dialog">
+    <form method="dialog">
+      <p class="section-kicker">DELETE PROJECT</p>
+      <h2>Are you sure?</h2>
+      <p>This removes the selected project from this browser. Export a backup first if you need one.</p>
+      <div class="dialog-actions">
+        <button class="button button-secondary" value="cancel">Keep project</button>
+        <button class="button button-danger" id="confirmDeleteBtn" value="delete">Delete project</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>
